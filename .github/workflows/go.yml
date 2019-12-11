@@ -20,12 +20,14 @@ jobs:
         run: go build -v .
 
   test:
+    runs-on: ubuntu-latest
     name: Test
     steps:
       - name: Test
         run: go test -v .
 
   validate:
+    runs-on: ubuntu-latest
     name: Validate
     steps:
       - name: Nancy for GitHub Actions (gomod)
