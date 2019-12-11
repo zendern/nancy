@@ -1,4 +1,4 @@
-name: Go
+name: Nancy PRs
 on: [push]
 jobs:
 
@@ -7,23 +7,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Set up Go 1.13
-      uses: actions/setup-go@v1
-      with:
-        go-version: 1.13
-      id: go
+      - name: Set up Go 1.13
+        uses: actions/setup-go@v1
+        with:
+          go-version: 1.13
+        id: go
 
-    - name: Check out code into the Go module directory
-      uses: actions/checkout@v1
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v1
 
-    - name: Test
-      run: go test -v .
+      - name: Build
+          run: go build -v .
 
-    - name: Build
-      run: go build -v .
+  test:
+    name: Test
+    steps:
+      - name: Test
+        run: go test -v .
 
-    - name: Run Nancy against Self (gomod)
-      run: go list -m all | ./nancy
+  validate:
+    name: Validate
+    steps:
+      - name: Nancy for GitHub Actions (gomod)
+          uses: sonatype-nexus-community/nancy-github-action@1.0.0
+          with:
+            # This is the path to the go.sum or Gopkg.lock file.
+            target: go.sum
 
-    - name: Run Nancy against Self (dep)
-      run: ./nancy Gopkg.lock
+      - name: Nancy for GitHub Actions (dep)
+          uses: sonatype-nexus-community/nancy-github-action@1.0.0
+          with:
+            # This is the path to the go.sum or Gopkg.lock file.
+            target: Gopkg.lock
