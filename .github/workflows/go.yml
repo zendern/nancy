@@ -3,7 +3,7 @@ on: [push]
 jobs:
 
   build:
-    name: Build
+    name: DoIt
     runs-on: ubuntu-latest
     steps:
       - name: Set up Go 1.13
@@ -18,19 +18,9 @@ jobs:
       - name: Build
         run: go build -v .
 
-  test:
-    needs: [build]
-    runs-on: ubuntu-latest
-    name: Test
-    steps:
       - name: Test
         run: go test -v .
 
-  validate:
-    needs: [test]
-    runs-on: ubuntu-latest
-    name: Validate
-    steps:
       - name: Nancy for GitHub Actions (gomod)
         uses: sonatype-nexus-community/nancy-github-action@1.0.0
         with:
