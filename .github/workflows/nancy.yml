@@ -12,4 +12,4 @@ jobs:
       uses: sonatype-nexus-community/nancy-github-action@1.0.0
       with:
         # This is the path to the go.sum or Gopkg.lock file.
-        target: ${{ github.workspace }}/nancy/go.sum
+        target: go.sum
