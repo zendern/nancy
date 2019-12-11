@@ -1,0 +1,16 @@
+name: Nancy-Action-Test
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Nancy for GitHub Actions
+      uses: sonatype-nexus-community/nancy-github-action@1.0.0
+      with:
+        # This is the path to the go.sum or Gopkg.lock file.
+        target: go.sum
+
