@@ -17,11 +17,13 @@ jobs:
       uses: actions/checkout@v1
 
     - name: Test
-      run: go build -v .
+      run: go test -v .
 
     - name: Build
       run: go build -v .
 
-
-    - name: Run Nancy against Self
+    - name: Run Nancy against Self (gomod)
       run: go list -m all | ./nancy
+
+    - name: Run Nancy against Self (dep)
+      run: ./nancy Gopkg.lock
